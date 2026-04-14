@@ -115,6 +115,7 @@ export interface KnowledgeArticle {
 }
 
 export interface LdapConfig {
+  [key: string]: unknown;
   id?: number;
   serverUrl: string;
   port: number;

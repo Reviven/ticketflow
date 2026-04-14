@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: ticketflow
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:ticketflow}
+    username: ${DB_USER:ticketflow}
+    password: ${DB_PASSWORD:ticketflow}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:ticketflow-default-secret-key-change-in-production-minimum-256-bits}
+  expiration: 86400000  # 24 hours
+
+# LDAP Configuration
+ldap:
+  enabled: ${LDAP_ENABLED:false}
+  url: ${LDAP_URL:ldap://localhost:389}
+  base-dn: ${LDAP_BASE_DN:DC=firma,DC=local}
+  bind-dn: ${LDAP_BIND_DN:}
+  bind-password: ${LDAP_BIND_PASSWORD:}
+  user-search-base: ${LDAP_USER_SEARCH_BASE:OU=Users}
+  user-search-filter: ${LDAP_USER_SEARCH_FILTER:(&(objectClass=user)(objectCategory=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))}
+  group-search-base: ${LDAP_GROUP_SEARCH_BASE:OU=Groups}
+  group-search-filter: ${LDAP_GROUP_SEARCH_FILTER:(objectClass=group)}
+  sync-interval: ${LDAP_SYNC_INTERVAL:3600000}  # 1 hour
+
+logging:
+  level:
+    pl.ticketflow: DEBUG
+    org.springframework.security: INFO

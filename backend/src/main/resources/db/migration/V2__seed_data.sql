@@ -3,7 +3,7 @@
 -- Default admin user (password: admin123)
 INSERT INTO users (username, first_name, last_name, email, password, role, source, status)
 VALUES ('admin', 'Admin', 'System', 'admin@ticketflow.local',
-        '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+        '$2a$10$9ZNbRcSXXaYnsgwA2nm.fu8c33T7n72TG7ek8GuF9in8sygFNoWDO',
         'ADMIN', 'LOCAL', 'ACTIVE');
 
 -- Default categories
